@@ -1,9 +1,15 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import Cookies from 'js-cookie';
+
+const token = Cookies.get('token');
 
 export const client = new ApolloClient({
-  cache: new InMemoryCache(),
   link: new HttpLink({
     uri: 'https://bigshine-hasura.herokuapp.com/v1/graphql',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
   }),
+  cache: new InMemoryCache(),
   connectToDevTools: true,
 });

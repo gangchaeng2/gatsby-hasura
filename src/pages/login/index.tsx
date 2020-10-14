@@ -21,7 +21,7 @@ const LoginPage: React.FC = () => {
   return (
     <div>
       <input name="email" value={email} onChange={e => setEmail(e.target.value)} />
-      <input name="password" value={password} onChange={e => setPassword(e.target.value)} />
+      <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
       <button onClick={onClickSignIn}>로그인</button>
     </div>
   )

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 import firebase from '../../utils/firebase'
 
@@ -13,13 +14,11 @@ function useCheckAuth() {
 
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async user => {
+      console.log(user);
       if (user) {
         const token = await user.getIdToken();
         const idTokenResult = await user.getIdTokenResult();
         const hasuraClaim = idTokenResult.claims["https://hasura.io/jwt/claims"];
-
-        console.log(token);
-        console.log(idTokenResult);
 
         if (hasuraClaim) {
           setAuthState({ status: "in", user, token });
@@ -34,13 +33,15 @@ function useCheckAuth() {
             setAuthState({ status: "in", user, token });
           });
         }
+
+        Cookies.set('token', token);
       } else {
         setAuthState({ status: "out", user: null, token: '' });
       }
     });
   }, []);
 
-  return authState;
+  return { authState };
 }
 
 export default useCheckAuth;

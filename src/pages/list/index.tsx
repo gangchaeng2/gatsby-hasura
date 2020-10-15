@@ -10,7 +10,7 @@ interface User {
 const ListPage: React.FC = () => {
   const APOLLO_QUERY = gql`
     {
-      users {
+      itmes: users {
         id
         name
       }

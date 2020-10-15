@@ -11,7 +11,7 @@ const LoginPage: React.FC = () => {
 
     try {
       await Firebase.auth().signInWithEmailAndPassword(email, password);
-      window.location.href = "/";
+      // window.location.href = "/";
 
     } catch (err) {
       console.log(err);

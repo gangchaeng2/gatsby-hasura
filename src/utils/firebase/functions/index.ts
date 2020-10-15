@@ -1,11 +1,13 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
-import firebase from '../../firebase';
+import firebase from '../';
 
 export const signOut = async () => {
   try {
     await firebase.auth().signOut();
-    window.location.href = "/";
+    Cookies.remove('token');
+    window.location.href = '/';
 
   } catch (error) {
     console.log(error);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 
-import firebase from '../../utils/firebase'
+import firebase from '../utils/firebase'
 
 interface Auth {
   status: string,
@@ -15,11 +15,11 @@ function useCheckAuth() {
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async user => {
       if (user) {
-        const token = await user.getIdToken();
+        let token = await user.getIdToken();
         const idTokenResult = await user.getIdTokenResult();
         const hasuraClaim = idTokenResult.claims["https://hasura.io/jwt/claims"];
 
-        console.log(idTokenResult.claims);
+        console.log(hasuraClaim);
 
         if (hasuraClaim) {
           setAuthState({ status: "in", user, token });
@@ -30,7 +30,7 @@ function useCheckAuth() {
           metadataRef.on("value", async (data) => {
             if(!data.exists) return
             // Force refresh to pick up the latest custom claims changes.
-            const token = await user.getIdToken(true);
+            token = await user.getIdToken(true);
             setAuthState({ status: "in", user, token });
           });
         }

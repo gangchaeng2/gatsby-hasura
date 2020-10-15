@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Firebase from '../../../utils/firebase'
+import Firebase from '../../utils/firebase'
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');

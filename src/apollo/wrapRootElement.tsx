@@ -1,16 +1,19 @@
-import React, { ReactElement, FunctionComponent } from 'react';
+import React, { ReactElement } from 'react';
 import { ApolloProvider } from '@apollo/client';
 
+import Layout from '../components/layout'
 import { client } from './client';
 
 interface EleProps {
   element: ReactElement,
 }
 
-export const wrapRootElement: FunctionComponent<EleProps> = ({ element }) => {
+export const wrapRootElement: React.FC<EleProps> = ({ element }) => {
   return (
     <ApolloProvider client={client}>
-      {element}
+      <Layout>
+        {element}
+      </Layout>
     </ApolloProvider>
   )
 };

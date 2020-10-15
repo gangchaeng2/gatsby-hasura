@@ -1,8 +1,9 @@
 const admin = require("firebase-admin");
-const serviceAccount = require(`${process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH}`);
+// const serviceAccount = require(`${process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH}`);
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  // credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.applicationDefault(),
   databaseURL: "https://dev-bigshine.firebaseio.com"
 });
 

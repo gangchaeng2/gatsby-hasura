@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { createUser } from '../../../utils/firebase/functions';
+import { createUser } from '../../utils/firebase/functions';
 
 const SignUpPage: React.FC = () => {
   const [email, setEmail] = useState('');

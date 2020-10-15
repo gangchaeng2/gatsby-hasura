@@ -16,7 +16,9 @@
   "dependencies": {
     "@apollo/client": "^3.2.3",
     "@firebase/app": "^0.6.11",
+    "axios": "^0.20.0",
     "firebase": "^7.23.0",
+    "firebase-admin": "^9.2.0",
     "gatsby": "^2.24.67",
     "gatsby-plugin-apollo": "^3.0.1",
     "gatsby-plugin-typescript": "^2.4.21",

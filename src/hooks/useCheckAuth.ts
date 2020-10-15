@@ -14,11 +14,12 @@ function useCheckAuth() {
 
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async user => {
-      console.log(user);
       if (user) {
         const token = await user.getIdToken();
         const idTokenResult = await user.getIdTokenResult();
         const hasuraClaim = idTokenResult.claims["https://hasura.io/jwt/claims"];
+
+        console.log(idTokenResult.claims);
 
         if (hasuraClaim) {
           setAuthState({ status: "in", user, token });

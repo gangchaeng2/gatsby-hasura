@@ -10,7 +10,7 @@ const HeaderComponent: React.FC = () => {
 
   return (
     <div>
-      Header
+      Header Component
       {isLogin ? <button onClick={signOut}>logout</button> : <button onClick={() => window.location.href = '/login'}>login</button>}
     </div>
   )

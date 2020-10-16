@@ -1,12 +1,8 @@
-import axios from 'axios';
-import Cookies from 'js-cookie';
-
 import firebase from '../';
 
 export const signOut = async () => {
   try {
     await firebase.auth().signOut();
-    Cookies.remove('token');
     window.location.href = '/';
 
   } catch (error) {
@@ -14,22 +10,9 @@ export const signOut = async () => {
   }
 };
 
-export const createUser = async (email: string, password: string) => {
+export const onClickSignUp = async (email: string, password: string) => {
   try {
-    // const test = await axios({
-    //   method: 'POST',
-    //   url: '/createUser',
-    //   data: {
-    //     email: 'test',
-    //     passoward: '1234',
-    //   }
-    // });
-    const test = await axios.post('/createUser', {
-      email: 'test',
-      password: '1234',
-    });
-
-    console.log(test);
+    await firebase.auth().createUserWithEmailAndPassword(email, password);
   } catch(err) {
     console.log(err);
   }

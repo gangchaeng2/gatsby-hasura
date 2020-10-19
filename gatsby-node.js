@@ -1,4 +1,4 @@
-// local 회원가입
+// local 회원가입 주석 풀어야 함
 // const admin = require("firebase-admin");
 // // const serviceAccount = require(`${process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH}`);
 
@@ -39,3 +39,16 @@
 //     res.json({ message: 'ok' });
 //   })
 // }
+
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions
+
+  // page.matchPath is a special key that's used for matching pages
+  // only on the client.
+  if (page.path.match(/^\/app/)) {
+    page.matchPath = "/app/*"
+
+    // Update the page.
+    createPage(page)
+  }
+}

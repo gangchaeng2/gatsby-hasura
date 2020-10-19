@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { navigate } from 'gatsby';
 
 import Firebase from '../../utils/firebase'
 
@@ -11,7 +12,7 @@ const LoginPage: React.FC = () => {
 
     try {
       await Firebase.auth().signInWithEmailAndPassword(email, password);
-      // window.location.href = "/";
+      navigate('/app/list');
 
     } catch (err) {
       console.log(err);

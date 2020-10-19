@@ -17,3 +17,7 @@ export const onClickSignUp = async (email: string, password: string) => {
     console.log(err);
   }
 }
+
+export const getToken = () => {
+  firebase.auth().currentUser?.getIdToken(false);
+}

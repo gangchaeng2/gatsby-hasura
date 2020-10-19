@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
 
 import firebase from '../utils/firebase'
 
 interface Auth {
-  status: string,
+  loading: boolean,
   user: object | null,
   token: string | null,
 }
 
 function useCheckAuth() {
-  const [authState, setAuthState] = useState({ status: 'loading', user: null, token: null } as Auth);
+  const [authState, setAuthState] = useState({ loading: true, user: null, token: null } as Auth);
 
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async user => {
@@ -19,10 +18,8 @@ function useCheckAuth() {
         const idTokenResult = await user.getIdTokenResult();
         const hasuraClaim = idTokenResult.claims["https://hasura.io/jwt/claims"];
 
-        console.log(hasuraClaim);
-
         if (hasuraClaim) {
-          setAuthState({ status: "in", user, token });
+          setAuthState({ loading: false, user, token });
         } else {
           // Check if refresh is required.
           const metadataRef = firebase.database().ref("metadata/" + user.uid + "/refreshTime");
@@ -31,13 +28,11 @@ function useCheckAuth() {
             if(!data.exists) return
             // Force refresh to pick up the latest custom claims changes.
             token = await user.getIdToken(true);
-            setAuthState({ status: "in", user, token });
+            setAuthState({ loading: false, user, token });
           });
         }
-
-        Cookies.set('token', token);
       } else {
-        setAuthState({ status: "out", user: null, token: '' });
+        setAuthState({ loading: false, user: null, token: null });
       }
     });
   }, []);

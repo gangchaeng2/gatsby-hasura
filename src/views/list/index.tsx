@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
-import { useQuery, createHttpLink } from '@apollo/client';
-import gql from 'graphql-tag';
 
-import { getToken } from '../../utils/firebase/functions';
+import { getUsers } from './repository';
 
 interface User {
   id: number,
@@ -10,19 +8,7 @@ interface User {
 }
 
 const ListView: FC = () => {
-  const APOLLO_QUERY = gql`
-    {
-      itmes: users {
-        id
-        name
-      }
-    }
-  `;
-
-  const { loading, error, data } = useQuery(APOLLO_QUERY, {
-    
-  });
-
+  const { loading, data } = await getUsers('asdf');
   if (loading) return null;
 
   return (

@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { ApolloProvider } from '@apollo/client';
 
-import Layout from '../components/layout'
+// import Layout from '../../components/layout'
 import { client } from './client';
 
 interface EleProps {
@@ -11,9 +11,9 @@ interface EleProps {
 export const wrapRootElement: React.FC<EleProps> = ({ element }) => {
   return (
     <ApolloProvider client={client}>
-      <Layout>
+      <>
         {element}
-      </Layout>
+      </>
     </ApolloProvider>
   )
 };

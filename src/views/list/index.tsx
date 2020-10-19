@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { getUsers } from './repository';
+import getUsers from './repository/getUsers';
 
 interface User {
   id: number,
@@ -8,8 +8,13 @@ interface User {
 }
 
 const ListView: FC = () => {
-  const { loading, data } = await getUsers('asdf');
-  if (loading) return null;
+  const { loading, data } = getUsers('asdf');
+  
+  if (loading) {
+    return <div>로딩</div>
+  }
+
+  console.log(loading, data);
 
   return (
     <div>

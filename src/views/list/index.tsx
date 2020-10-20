@@ -8,19 +8,19 @@ interface User {
 }
 
 const ListView: FC = () => {
-  const { loading, data } = getUsers('asdf');
-  
-  if (loading) {
+  const { isLoading, users } = getUsers('asdf');
+
+  if (isLoading) {
     return <div>로딩</div>
   }
 
-  console.log(loading, data);
+  console.log(users);
 
   return (
     <div>
       HASURA TEST
 
-      {/* {data.users && data.users.length > 0 && data.users.map((item: User) => {
+      {/* {users && users.length > 0 && users.map((item: User) => {
         return (
           <p key={item.id}>
             {item.id} - {item.name}

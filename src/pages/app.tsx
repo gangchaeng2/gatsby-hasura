@@ -1,6 +1,5 @@
 import React from 'react';
 import { Router } from '@reach/router';
-import { navigate } from 'gatsby';
 
 import useCheckAuth from '../hooks/useCheckAuth';
 
@@ -17,19 +16,24 @@ import SignUp from '../views/signUp';
 import List from '../views/list';
 import Dashboard from '../views/dashboard';
 
+import NotFound from '../pages/404';
+
 const IndexPage: React.FC = () => {
   const { authState: { isLoading, isLoggedIn } } = useCheckAuth();
 
   if (isLoading) {
-    <div>loading....</div>
+    return (
+      <div>loading....</div>  
+    );
+
   } else {
     if (!isLoggedIn) {
       return (
         <Layout>
           <Router basepath="/app">
+            <BasicRoute default component={NotFound} />
             <BasicRoute path="/login" component={Login} />
             <BasicRoute path="/signUp" component={SignUp} />
-            <BasicRoute default path="/login" component={Login} />
           </Router>
         </Layout>
       );
@@ -38,9 +42,9 @@ const IndexPage: React.FC = () => {
     return (
       <Layout>
         <Router basepath="/app">
+          <PrivateRoute default component={NotFound} />
           <PrivateRoute path="/list" component={List} />
-          <PrivateRoute path="/dashboard" component={List} />
-          <PrivateRoute default path="/" component={Dashboard} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
         </Router>
       </Layout>
     );

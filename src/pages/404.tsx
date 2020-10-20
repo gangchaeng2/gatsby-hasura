@@ -1,9 +1,11 @@
 import React from 'react';
 
-function PageNotFount() {
+const NotFoundPage: React.FC = () => {
   return (
     <div>
-      404
+      404 Not Found
     </div>
   )
-}
+};
+
+export default NotFoundPage;

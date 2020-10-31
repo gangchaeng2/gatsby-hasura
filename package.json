@@ -16,6 +16,7 @@
   "dependencies": {
     "@apollo/client": "^3.2.3",
     "@firebase/app": "^0.6.11",
+    "antd": "^4.7.2",
     "axios": "^0.20.0",
     "firebase": "^7.23.0",
     "firebase-admin": "^9.2.0",

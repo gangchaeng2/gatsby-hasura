@@ -14,8 +14,6 @@ const ListView: FC = () => {
     return <div>로딩</div>
   }
 
-  console.log(users);
-
   return (
     <div>
       HASURA TEST
